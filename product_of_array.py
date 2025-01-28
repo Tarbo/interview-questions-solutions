@@ -31,7 +31,7 @@ from typing import List
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        # Since O(n) is required, I will try the bruteforce approach.
+        # Since O(n) is required, I will try the bruteforce approach. Saw the solution but cant add it here as I only incldue what I solved myself.
         nums2 = nums.copy()
         for index in range(len(nums)):
             if index == 0:
@@ -40,9 +40,7 @@ class Solution:
                 nums2[index] = math.prod(nums[:-1])
             else:
                 new_list = nums[:index] + nums[index+1:]
-                print(f"Index {index}:\t{new_list}")
                 nums2[index] = math.prod(new_list)
-
         return nums2
 
 if __name__ == "__main__":
