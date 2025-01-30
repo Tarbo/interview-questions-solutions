@@ -24,19 +24,28 @@ There are no two adjacent flowers in flowerbed.
 """
 class Solution:
     def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
-        first_plot = flowerbed[0]
         num_vacant_plots = 0
-        if len(flowerbed) == 1 & n > 0:
-            num_vacant_plots = 1 - first_plot
-        elif first_plot == 1 or first_plot == flowerbed[1] == 0:
-            plots = flowerbed[::2]
-            num_vacant_plots = len(plots) - sum(plots)
-        else:
-            plots =flowerbed[1::2]
-            num_vacant_plots = len(plots) - sum(plots)
+        l = len(flowerbed)
+        for i in range(len(flowerbed)):
+            check = False
+            if l == 1:
+                num_vacant_plots = 1 - flowerbed[0]
+            if i == 0 and l > 1:
+                check = (flowerbed[i] == flowerbed[i+1] == 0)
+                num_vacant_plots += 1 if check else 0
+            elif i == l - 1 and l > 1:
+                check = (flowerbed[-1] == flowerbed[-2] == 0)
+                num_vacant_plots += 1 if check else 0
+            elif i != 0 and i != l-1 and l > 1:
+                check = (flowerbed[i-1] == flowerbed[i] == flowerbed[i+1] == 0)
+                num_vacant_plots += 1 if check else 0
+            if check:
+                flowerbed[i] = 1
         return n <= num_vacant_plots
+
+
 if __name__ == "__main__":
     sol = Solution()
-    flowerbed = [1,0,0,0,0,1]
-    n = 2
+    flowerbed = [0]
+    n = 1
     print(sol.canPlaceFlowers(flowerbed, n))
