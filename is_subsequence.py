@@ -26,17 +26,19 @@ Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 
 """
 class Solution:
     def isSubsequence(self, s:str, t:str)->bool:
-        previous_index = 0
-        for i in range(len(s)):
-            if s[i] in t and t.index(s[i]) >= previous_index:
-                previous_index = t.index(s[i])
-            else:
-                return False
-        return True
+        if len(t) == len(s) == 0:
+            return True
+        s_list = list(s)
+        for i in range(len(t)):
+            if t[i] in s_list and s_list.index(t[i]) == 0 and len(s_list) != 0:
+                _ = s_list.pop(0)
+            if len(s_list) == 0 and i != 0:
+                return True
+        return False
 
 if __name__ == "__main__":
     sol = Solution()
-    s = 'abc'
-    t = 'ahbgdc'
+    s = "aaaaaa"
+    t = "bbaaaa"
     print(sol.isSubsequence(s,t))
 
