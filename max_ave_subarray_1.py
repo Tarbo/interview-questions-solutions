@@ -23,10 +23,15 @@ n == nums.length
 
 class Solution:
     def findMaxAverage(self, nums: List[int], k: int) -> float:
-        max_val = 0
-        for i in range(len(nums)-k):
-            ave = sum(nums[i:i+k])/k
-            if max_val < ave:
+        max_val = float('-inf')
+        sum_num = 0
+        for i in range(len(nums)-k+1):
+            if i == 0:
+                sum_num = sum(nums[:i+k])
+            else:
+                sum_num = sum_num + nums[i+k-1] - nums[i-1]
+            ave = sum_num/k
+            if ave > max_val:
                 max_val = ave
         return max_val
 
