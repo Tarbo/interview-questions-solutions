@@ -29,18 +29,18 @@ Constraints:
 Follow up: Could you implement a solution that runs in O(n) time complexity and O(1) space complexity?"""
 class Solution:
     def increasingTriplet(self, nums: List[int]) -> bool:
-        left_index, right_index = 0, len(nums)-1
-        for index in range(len(nums)):
-            if left_index == right_index:
-                return False
-            if nums[left_index] < nums[index] < nums[right_index]:
+        min_num, max_num = float('inf'), float('inf')
+        if len(nums) < 3:
+            return False
+        for number in nums:
+            if number <= min_num:
+                min_num = number
+            elif number <= max_num:
+                max_num = number
+            else:
                 return True
-            elif nums[left_index] < nums[index] and nums[index] > nums[right_index]:
-                right_index -= 1
-            elif nums[left_index] > nums[index] and nums[index] < nums[right_index]:
-                left_index += 1
-        return False 
-
+        return False
+            
 if __name__ == "__main__":
     sol = Solution()
     nums = [20,100,10,12,5,13] 
