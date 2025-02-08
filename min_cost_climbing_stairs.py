@@ -36,10 +36,9 @@ class Solution:
         min_costs = [0] * len(cost)
         min_costs[-2] = cost[-2]
         if len(cost) > 2:
-            for i in range(len(cost)-3, 0,-1):
+            for i in range(len(cost)-3, -1,-1):
                 print(f'i = {i}')
                 min_costs[i] = cost[i] + min(min_costs[i+1], min_costs[i+2])
-            min_costs[0] = cost[0] + min(min_costs[1], min_costs[2])
         print(min_costs)
         return min(min_costs[0], min_costs[1])
 if __name__ == "__main__":
