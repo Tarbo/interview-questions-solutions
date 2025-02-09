@@ -30,16 +30,15 @@ s consists of lowercase English letters.
 class Solution:
     def maxVowels(self, s: str, k: int) -> int:
         max_vowel_num = 0
+        s_list = [1 if sub in ['a', 'e', 'i', 'o', 'u'] else 0 for sub in s]
         limit = len(s)-k+1
         for i in range(limit):
-            if s[i] in ['a', 'e', 'i', 'o','u'] and i < limit :
-                num_sub = len([sub for sub in s[i:i+k] if sub in ['a', 'e', 'i', 'o','u']])
-                if num_sub > max_vowel_num:
-                    max_vowel_num = num_sub
+            if s[i] == 1 and i < limit :
+                num_sub = sum(s_list[i:i+k])
             else:
-                num_sub = len([sub for sub in s[i:i+k] if sub in ['a', 'e', 'i', 'o','u']])
-                if num_sub > max_vowel_num:
-                    max_vowel_num = num_sub
+                num_sub = sum(s_list[i:i+k])
+            if num_sub > max_vowel_num:
+                max_vowel_num = num_sub
         return max_vowel_num
     
 if __name__ == "__main__":
