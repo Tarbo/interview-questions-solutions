@@ -15,16 +15,17 @@ class Solution:
         target_node = num_nodes // 2
         if num_nodes == 1:
             return None
-        current = head
-        previous = head
-        i = 0
-        for i in range(num_nodes):
-            if i == target_node:
-                previous.next = current.next
-                current.next = None
-            else:
-                previous = current
-                current = current.next
-                i += 1
-        return head
+        else:
+            current = head
+            previous = head
+            i = 0
+            for i in range(num_nodes):
+                if i == target_node:
+                    previous.next = current.next
+                    current.next = None
+                    return head
+                else:
+                    previous = current
+                    current = current.next
+                    i += 1
 
