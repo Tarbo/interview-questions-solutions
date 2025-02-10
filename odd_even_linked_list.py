@@ -15,21 +15,21 @@ class Solution:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if head is None or head.next is None or head.next.next is None:
             return head
-        odd_list = head
-        even_list = head.next
-        even_head = even_list
-        current_node = even_list.next
+        odd_pointer = head
+        even_pointer = head.next
+        even_head = even_pointer
+        current_node = even_pointer.next
         index = 3
         while current_node is not None:
             if index % 2 == 0:
-                even_list.next = current_node
-                even_list = even_list.next
+                even_pointer.next = current_node
+                even_pointer = even_pointer.next
             else:
-                odd_list.next = current_node
-                odd_list.next = odd_list.next
+                odd_pointer.next = current_node
+                odd_pointer.next = odd_pointer.next
             index += 1
             current_node = current_node.next
-        odd_list.next = even_head
-        even_list.head = None
+        odd_pointer.next = even_head
+        even_pointer.head = None
         return head
         
