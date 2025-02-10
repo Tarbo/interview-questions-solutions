@@ -26,7 +26,7 @@ class Solution:
                 even_list = even_list.next
             else:
                 odd_list.next = current_node
-                odd_list.next = current_node.next
+                odd_list.next = odd_list.next
             index += 1
             current_node = current_node.next
         odd_list.next = even_head
