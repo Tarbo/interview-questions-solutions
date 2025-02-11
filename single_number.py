@@ -5,9 +5,9 @@ You must implement a solution with a linear runtime complexity and use only cons
 """
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        dict_count = {num:0 for num in nums}
+        dict_count = {num:0 for num in set(nums)}
         for num in nums:
-            dict_count[num] = 1
+            dict_count[num] += 1
         return [num for num in dict_count.keys() if dict_count[num] == 1][0]
 
 if __name__ == "__main__":
