@@ -29,15 +29,18 @@ Constraints:
 2 <= asteroids.length <= 104
 -1000 <= asteroids[i] <= 1000
 asteroids[i] != 0"""
+from typing import List
+
+
 class Solution:
     def are_opposite_signs(self, a:int, b:int)-> bool:
         return (a > 0 and b < 0) or (a < 0 and b > 0)
     
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
-        if len(asteroids) < 2:
-            return asteroids
         stable_stack = []
         for asteroid in asteroids:
+            if len(stable_stack) == 0 or self.are_opposite_signs(asteroid, stable_stack[-1]) == False:
+                stable_stack.append(asteroid)
             while len(stable_stack) != 0 and self.are_opposite_signs(asteroid, stable_stack[-1]):
                 if abs(asteroid) > abs(stable_stack[-1]):
                     # top of the stack explodes
@@ -48,6 +51,10 @@ class Solution:
                 else:
                     stable_stack.pop()
                     break
-            stable_stack.append(asteroid)
         return stable_stack
+    
+if __name__ == "__main__":
+    asteroids = [-2,-1,1,2]
+    sol = Solution()
+    print(sol.asteroidCollision(asteroids))
                  
