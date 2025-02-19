@@ -49,4 +49,5 @@ class Solution:
                 nums[index] = 120
             else:
                 current_num = nums[index]
+        nums.sort()
         return len([k for k in nums if k != 120])
