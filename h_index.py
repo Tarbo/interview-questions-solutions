@@ -31,6 +31,6 @@ class Solution:
         return 0
 
 if __name__ == "__main__":
-    citations = [3,0,6,1,5]
+    citations = [1,3,1]
     sol = Solution()
     print(sol.hIndex(citations))
