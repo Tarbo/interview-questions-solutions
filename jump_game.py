@@ -26,10 +26,8 @@ class Solution:
         can_jump = [False] * len(nums)
         nums_length = len(nums)
         for index in range(len(nums)-1,-1,-1):
-            print(f"Before:\t{can_jump}")
             if any(can_jump[index+1:min(index+1+nums[index], nums_length-1)]) or nums[index] >= nums_length - index - 1:
                 can_jump[index] = True
-            print(f"After:\t{can_jump}\t: Index:\t{index}")
         return can_jump[0]
     
 if __name__ == "__main__":
