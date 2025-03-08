@@ -28,16 +28,25 @@ Constraints:
 class Solution:      
     def closestPrimes(self, left: int, right: int) -> List[int]:
         # generate prime numbers
-        nums = range(left,right+1)
-        max_num_mar = int(right ** 0.5)
-        nums_bool = [True] * len(nums)
-        # mark the composites and remove
-        for index in range(len(nums)):
-            for num in range(2, max_num_mar+1):
-                if nums[index] % num == 0:
-                    nums_bool[index] = False
-                    break
-        prime_nums = [nums[i] for i in range(len(nums)) if nums_bool[i] and nums[i] > 1]
+        prime_nums = []
+        ref_num = left
+        num_primes = 0
+        while ref_num <= right and ref_num > 1:
+            prime = True
+            if ref_num == 2:
+                prime_nums.append(ref_num)
+            else:
+                for num in range(2, int(ref_num**0.5)+1): # fix here
+                    if ref_num % num == 0: 
+                        prime = False
+                        break
+                if prime:
+                    prime_nums.append(ref_num)
+                    num_primes += 1
+            if num_primes > 1:
+                ref_num += 2
+            else:
+                ref_num += 1
         if len(prime_nums) < 2:
             return [-1, -1]
         min_dist = float('inf')
@@ -47,7 +56,7 @@ class Solution:
             if prime_nums[index] - prime_nums[index-1] <= min_dist:
                 min_dist = prime_nums[index] - prime_nums[index-1]
                 righ_num = prime_nums[index]
-                left_num = prime_nums[index-1]
+                left_num = prime_nums[index-1]      
         return [left_num, righ_num]
 
     
