@@ -32,10 +32,11 @@ class Solution:
         max_num_mar = int(right ** 0.5)
         nums_bool = [True] * len(nums)
         # mark the composites and remove
-        for num in range(2, max_num_mar+1):
-            for index in range(len(nums)):
-                if nums_bool[index] == True and nums[index] % num == 0:
+        for index in range(len(nums)):
+            for num in range(2, max_num_mar+1):
+                if nums[index] % num == 0:
                     nums_bool[index] = False
+                    break
         prime_nums = [nums[i] for i in range(len(nums)) if nums_bool[i] and nums[i] > 1]
         if len(prime_nums) < 2:
             return [-1, -1]
@@ -48,6 +49,7 @@ class Solution:
                 righ_num = prime_nums[index]
                 left_num = prime_nums[index-1]
         return [left_num, righ_num]
+
     
 if __name__ == "__main__":
     left, right = 1, 2
