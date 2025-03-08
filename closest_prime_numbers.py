@@ -28,25 +28,17 @@ Constraints:
 class Solution:      
     def closestPrimes(self, left: int, right: int) -> List[int]:
         # generate prime numbers
-        prime_nums = []
-        ref_num = left
-        num_primes = 0
-        while ref_num <= right and ref_num > 1:
-            prime = True
-            if ref_num == 2:
-                prime_nums.append(ref_num)
-            else:
-                for num in range(2, int(ref_num**0.5)+1): # fix here
-                    if ref_num % num == 0: 
-                        prime = False
-                        break
-                if prime:
-                    prime_nums.append(ref_num)
-                    num_primes += 1
-            if num_primes > 1:
-                ref_num += 2
-            else:
-                ref_num += 1
+        is_prime = [True] * (right + 1)
+        p = 2
+        while p * p <= right:
+            if is_prime[p]:
+                for i in range(p * p, right + 1, p):
+                    is_prime[i] = False
+            p += 1
+        
+        # Collect all prime numbers in the range [left, right]
+        prime_nums = [num for num in range(max(2, left), right + 1) if is_prime[num]]
+        
         if len(prime_nums) < 2:
             return [-1, -1]
         min_dist = float('inf')
@@ -61,7 +53,7 @@ class Solution:
 
     
 if __name__ == "__main__":
-    left, right = 1, 2
+    left, right = 1, 1000000
     sol = Solution()
     print(sol.closestPrimes(left, right))
 
